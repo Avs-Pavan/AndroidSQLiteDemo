@@ -7,16 +7,29 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnInsert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="#009688"
         android:text="Insert person"
-        android:layout_margin="10dp"
         android:textColor="@color/white"
-        android:id="@+id/btnInsert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/deleteInsert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#F44336"
+        android:text="Delete person"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnInsert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

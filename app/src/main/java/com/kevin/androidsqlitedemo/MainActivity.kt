@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
 
+        // Set the click listener on the insert button
         binding.btnInsert.setOnClickListener {
             // Insert data into the database
 
@@ -42,6 +43,21 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Failed to insert data", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Set the click listener on the delete button
+        binding.deleteInsert.setOnClickListener {
+            // Delete data from the database
+
+            // Delete the data
+            val isDeleted = sqliteHelper.deletePerson(1)
+
+            // Check if the data was deleted successfully
+            if (isDeleted) {
+                Toast.makeText(this, "Data deleted successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Failed to delete data", Toast.LENGTH_SHORT).show()
             }
         }
     }

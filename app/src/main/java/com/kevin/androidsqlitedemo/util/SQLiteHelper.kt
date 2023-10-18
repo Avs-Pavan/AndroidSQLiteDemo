@@ -67,5 +67,20 @@ class SQLiteHelper(context: Context) :
         return id
     }
 
+    // delete data from the database
+    fun deletePerson(id: Int): Boolean {
+        // Get the database in write mode
+        val db = this.writableDatabase
+
+        // Delete the row
+        val rows = db.delete(TABLE_NAME, "${Constants.COLUMN_ID} = ?", arrayOf(id.toString()))
+
+        // Close the database connection
+        db.close()
+
+        return rows > 0
+
+    }
+
 
 }
