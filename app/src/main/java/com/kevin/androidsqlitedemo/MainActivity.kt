@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.kevin.androidsqlitedemo.databinding.ActivityMainBinding
 import com.kevin.androidsqlitedemo.pojo.Person
-import com.kevin.androidsqlitedemo.util.SQLiteHelper
+import com.kevin.androidsqlitedemo.sqlite.SQLiteHelper
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,7 +71,11 @@ class MainActivity : AppCompatActivity() {
 
             // Check if the data was read successfully
             if (personList.isNotEmpty()) {
-                Toast.makeText(this, "Data read successfully\n ${personList.joinToString()}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Data read successfully\n ${personList.joinToString()}",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(this, "No data in table", Toast.LENGTH_SHORT).show()
             }
@@ -90,6 +94,35 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "No data in table", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Set the click listener on the update button
+        binding.btnUpdateSingle.setOnClickListener {
+
+            // Read a single row from the database
+
+            // Read the data
+            val person = sqliteHelper.readOne(2)
+
+            // Check if the data was read successfully
+            if (person != null) {
+
+                // Update the data
+                person.age += 5
+
+                // Update the data in the database
+                val isUpdated = sqliteHelper.update(person)
+
+                // Check if the data was updated successfully
+                if (isUpdated) {
+                    Toast.makeText(this, "Data updated successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to update data", Toast.LENGTH_SHORT).show()
+                }
+
+
+            }
+
         }
     }
 

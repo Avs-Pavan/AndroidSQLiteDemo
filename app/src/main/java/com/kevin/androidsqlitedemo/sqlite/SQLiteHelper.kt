@@ -1,4 +1,4 @@
-package com.kevin.androidsqlitedemo.util
+package com.kevin.androidsqlitedemo.sqlite
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.kevin.androidsqlitedemo.pojo.Person
-import com.kevin.androidsqlitedemo.util.Constants.DATABASE_NAME
-import com.kevin.androidsqlitedemo.util.Constants.DATABASE_VERSION
-import com.kevin.androidsqlitedemo.util.Constants.TABLE_NAME
+import com.kevin.androidsqlitedemo.sqlite.Constants.DATABASE_NAME
+import com.kevin.androidsqlitedemo.sqlite.Constants.DATABASE_VERSION
+import com.kevin.androidsqlitedemo.sqlite.Constants.TABLE_NAME
 
 class SQLiteHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -114,6 +114,12 @@ class SQLiteHelper(context: Context) :
             // Add the person object to the list
             personList.add(person)
         }
+
+        // close the cursor
+        cursor.close()
+
+        // close the database
+        db.close()
         return personList
     }
 
@@ -142,7 +148,44 @@ class SQLiteHelper(context: Context) :
                 cursor.getString(cursor.getColumnIndex(Constants.COLUMN_PROFESSION))
             )
         }
+
+        // close the cursor
+        cursor.close()
+
+        // close the database
+        db.close()
+
         return null
+    }
+
+    // Update data in the database
+    fun update(person: Person): Boolean {
+
+        // Get the database in write mode
+        val db = this.writableDatabase
+
+        // Create a map of values
+        val values = ContentValues().apply {
+            put(Constants.COLUMN_NAME, person.name)
+            put(Constants.COLUMN_AGE, person.age)
+            put(Constants.COLUMN_PROFESSION, person.profession)
+        }
+
+        // Update the row
+        val rows =
+            db.update(
+                TABLE_NAME,
+                values,
+                "${Constants.COLUMN_ID} = ?",
+                arrayOf(person.id.toString())
+            )
+
+        // Close the database connection
+        db.close()
+
+        // Return true if the row was updated else false
+        return rows > 0
+
     }
 
 }

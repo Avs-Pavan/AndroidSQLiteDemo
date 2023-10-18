@@ -44,6 +44,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnRead" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdateSingle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#2196F3"
+        android:text="Update single person"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnReadSingle" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDelete"
@@ -55,6 +67,6 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnReadSingle" />
+        app:layout_constraintTop_toBottomOf="@id/btnUpdateSingle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

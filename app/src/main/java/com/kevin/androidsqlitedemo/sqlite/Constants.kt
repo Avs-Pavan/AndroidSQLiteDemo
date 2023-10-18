@@ -1,4 +1,4 @@
-package com.kevin.androidsqlitedemo.util
+package com.kevin.androidsqlitedemo.sqlite
 
 object Constants {
 
