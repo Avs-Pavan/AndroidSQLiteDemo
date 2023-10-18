@@ -1,5 +1,6 @@
 package com.kevin.androidsqlitedemo.util
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -82,5 +83,66 @@ class SQLiteHelper(context: Context) :
 
     }
 
+
+    // Read data from the database
+    @SuppressLint("Range")
+    fun readAll(): List<Person> {
+        // Get the database in read mode
+        val db = this.readableDatabase
+
+        // Create a list to store the data
+        val personList = mutableListOf<Person>()
+
+        // Query the database
+        val query = "SELECT * FROM $TABLE_NAME"
+
+        // Get the cursor object from the database query
+        // store it in a variable if it is null return the empty list
+        val cursor = db?.rawQuery(query, null)
+            ?: // Return the empty list
+            return personList
+
+        // Loop through the cursor object and store the data in the list
+        while (cursor.moveToNext()) {
+            val person = Person(
+                cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_ID)),
+                cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME)),
+                cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_AGE)),
+                cursor.getString(cursor.getColumnIndex(Constants.COLUMN_PROFESSION))
+            )
+
+            // Add the person object to the list
+            personList.add(person)
+        }
+        return personList
+    }
+
+
+    @SuppressLint("Range")
+    fun readOne(id: Int): Person? {
+        // Get the database in read mode
+        val db = this.readableDatabase
+
+
+        // Query the database
+        val query = "SELECT * FROM $TABLE_NAME WHERE ${Constants.COLUMN_ID} = ?"
+
+        // Get the cursor object from the database query
+        // store it in a variable if it is null return null
+        val cursor = db?.rawQuery(query, arrayOf(id.toString()))
+            ?: // Return null
+            return null
+
+        // Loop through the cursor object and return the data
+        while (cursor.moveToNext()) {
+            return Person(
+                cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_ID)),
+                cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME)),
+                cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_AGE)),
+                cursor.getString(cursor.getColumnIndex(Constants.COLUMN_PROFESSION))
+            )
+        }
+        return null
+    }
 
 }

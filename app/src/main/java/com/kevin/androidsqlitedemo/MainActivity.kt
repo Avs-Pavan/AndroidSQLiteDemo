@@ -2,7 +2,6 @@ package com.kevin.androidsqlitedemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.kevin.androidsqlitedemo.databinding.ActivityMainBinding
 import com.kevin.androidsqlitedemo.pojo.Person
@@ -47,10 +46,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Set the click listener on the delete button
-        binding.deleteInsert.setOnClickListener {
+        binding.btnDelete.setOnClickListener {
             // Delete data from the database
 
             // Delete the data
+            // Change the id to the id of the row you want to delete
             val isDeleted = sqliteHelper.deletePerson(1)
 
             // Check if the data was deleted successfully
@@ -58,6 +58,37 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Data deleted successfully", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Failed to delete data", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        // Set the click listener on the read button
+        binding.btnRead.setOnClickListener {
+            // Read data from the database
+
+            // Read the data
+            val personList = sqliteHelper.readAll()
+
+            // Check if the data was read successfully
+            if (personList.isNotEmpty()) {
+                Toast.makeText(this, "Data read successfully\n ${personList.joinToString()}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "No data in table", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Set the click listener on the read single button
+        binding.btnReadSingle.setOnClickListener {
+            // Read a single row from the database
+
+            // Read the data
+            val person = sqliteHelper.readOne(2)
+
+            // Check if the data was read successfully
+            if (person != null) {
+                Toast.makeText(this, "Data read successfully\n $person", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "No data in table", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -21,7 +21,32 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/deleteInsert"
+        android:id="@+id/btnRead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#4CAF50"
+        android:text="Read person list"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnInsert" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnReadSingle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#00BCD4"
+        android:text="Read single person"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRead" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -30,6 +55,6 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnInsert" />
+        app:layout_constraintTop_toBottomOf="@id/btnReadSingle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
